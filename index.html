@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <button
+        id="toggleReminders"
+        class="ghost"
+        aria-pressed="false"
+        title="Toggle reminders">
+        Start Reminders
+      </button>
+    </header>
+
+    <main class="container">
+      <!-- Sidebar: Projects -->
+      <section class="card" aria-label="Projects">
+        <h2 style="margin-bottom: 10px">Projects</h2>
+        <form id="projectForm" class="inset" autocomplete="off">
+          <div class="field">
+            <label for="projectName">Project name</label>
+            <input
+              id="projectName"
+              type="text"
+              placeholder="e.g., Semester Goals"
+              required />
+          </div>
+          <div class="row">
+            <button type="submit">Add Project</button>
+            <button type="button" id="deleteProject" class="danger">
+              Delete Project
+            </button>
+          </div>
+        </form>
+
+        <div
+          id="projectList"
+          class="project-list"
+          role="list"
+          aria-label="Project list"></div>
+      </section>
+
+      <!-- Main: Tasks -->
+      <section class="card" aria-label="Tasks">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+          ">
+          <h2 id="currentProjectName" style="margin: 0">No project selected</h2>
+          <span class="badge" id="projectCounts">0/0 done</span>
+        </div>
+        <div class="progress" aria-label="Project progress" aria-live="polite">
+          <span id="projectProgress" style="width: 0%"></span>
+        </div>
+
+        <form
+          id="taskForm"
+          class="inset"
+          autocomplete="off"
+          style="margin-top: 12px">
+          <div class="row">
+            <div class="field" style="flex: 2">
+              <label for="taskTitle">Task title</label>
+              <input
+                id="taskTitle"
+                type="text"
+                placeholder="e.g., Write report"
+                required />
+            </div>
+            <div class="field" style="flex: 1">
+              <label for="taskDeadline">Deadline</label>
+              <input id="taskDeadline" type="date" required />
+            </div>
+          </div>
+          <div class="row">
+            <button type="submit" class="success">Add Task</button>
+            <button type="button" id="completeAll" class="secondary">
+              Mark All Complete
+            </button>
+          </div>
+        </form>
+
+        <div class="controls" style="margin-top: 10px">
+          <div class="filters" role="tablist" aria-label="Task filters">
+            <button
+              data-filter="all"
+              class="active"
+              role="tab"
+              aria-selected="true">
+              All
+            </button>
+            <button data-filter="pending" role="tab" aria-selected="false">
+              Pending
+            </button>
+            <button data-filter="completed" role="tab" aria-selected="false">
+              Completed
+            </button>
+          </div>
+          <span class="spacer"></span>
+          <div class="stats">
+            <strong id="finishedCount">0</strong> tasks finished
+          </div>
+        </div>
+
+        <div
+          id="taskList"
+          class="task-list"
+          role="list"
+          aria-live="polite"></div>
+      </section>
+    </main>
+
+    <div class="toasts" id="toasts" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
